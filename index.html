@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jeeana Vedarth — Creative Developer</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-md fixed-top" id="navbar">
+    <div class="container">
+      <a class="navbar-brand" href="#">JV.</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+        <ul class="navbar-nav gap-3">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="container position-relative">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <div class="eyebrow">Available for work</div>
+          <h1 class="hero-title">
+            Hi, I'm<br>
+            <span class="highlight">Jeeana Vedarth</span>
+          </h1>
+          <p class="hero-sub">
+            I build <span class="typed-word" id="typed"></span>
+          </p>
+          <p class="hero-desc">Creative developer turning ideas into beautiful, fast, and responsive web experiences. Based in Port Louis, Mauritius.</p>
+          <div class="d-flex gap-3 flex-wrap mt-4">
+            <a href="#projects" class="btn-primary-custom">See my work ↗</a>
+            <a href="#contact" class="btn-outline-custom">Let's talk</a>
+          </div>
+          <div class="stat-pills">
+            <div class="stat-pill">
+              <span class="num">5+</span>
+              <span class="label">Projects</span>
+            </div>
+            <div class="stat-pill">
+              <span class="num">2+</span>
+              <span class="label">Years coding</span>
+            </div>
+            <div class="stat-pill">
+              <span class="num">100%</span>
+              <span class="label">Passion</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 text-center">
+          <div class="avatar-wrap d-inline-block">
+            <div class="avatar-ring">
+              <img src="assets\ChatGPT Image Jun 16, 2026, 11_42_44 AM.png" alt="photo" class="avatar-img"/>
+            </div>
+            <span class="avatar-badge">✦ Open to work</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section-pad section-alt" id="about">
+    <div class="container">
+      <h2 class="section-title">About <span class="accent-dot">me</span></h2>
+      <p class="section-sub">A little bit about who I am</p>
+      <div class="row g-5 align-items-center">
+        <div class="col-md-6 fade-up">
+          <p class="about-text">I'm a self-taught developer passionate about turning ideas into real, working products. I love clean code, thoughtful UI, and learning new technologies every single day.</p>
+          <p class="about-text">When I'm not coding, you'll find me exploring open-source projects, sketching UI concepts, or watching the sunset from Grand Baie.</p>
+          <a href="assets\CV FINAL.pdfr.pdf" class="btn-primary-custom mt-3" download>
+            <i class="bi bi-download me-2"></i>Download CV
+          </a>
+        </div>
+        <div class="col-md-6 fade-up">
+          <div class="info-card">
+            <div class="info-row"><span class="info-label">Name</span><span>Your Full Name</span></div>
+            <div class="info-row"><span class="info-label">Location</span><span>Port Louis, Mauritius 🇲🇺</span></div>
+            <div class="info-row"><span class="info-label">Email</span><span>you@email.com</span></div>
+            <div class="info-row"><span class="info-label">Languages</span><span>English, French</span></div>
+            <div class="info-row"><span class="info-label">Status</span><span class="badge-available">✦ Open to work</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section-pad" id="projects">
+    <div class="container">
+      <h2 class="section-title">My <span class="accent-dot">Projects</span></h2>
+      <p class="section-sub">Real systems built at university level</p>
+
+      <!-- FEATURED PROJECT -->
+      <div class="featured-project fade-up mb-4">
+        <div class="row g-0 align-items-center">
+          <div class="col-lg-6">
+            <div class="featured-img-wrap">
+              <img src="https://placehold.co/600x380/ff6b6b/fff?text=🚗+Automated+Parking+System" alt="Automated Parking System" class="featured-img"/>
+              <div class="featured-badge">⭐ Featured Project</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="featured-body">
+              <div class="project-tags mb-3">
+                <span class="tag">SQL</span>
+                <span class="tag">Database Design</span>
+                <span class="tag">ERD</span>
+                <span class="tag">University</span>
+              </div>
+              <h3 class="featured-title">Automated Parking System</h3>
+              <p class="featured-desc">A full database-driven parking management system designed to automate vehicle entry/exit tracking, slot allocation, and fee calculation. Built with a normalized relational database, ER diagrams, and optimized SQL queries for real-time slot availability.</p>
+              <ul class="feature-list">
+                <li><i class="bi bi-check-circle-fill"></i> Automated slot allocation on vehicle entry</li>
+                <li><i class="bi bi-check-circle-fill"></i> Real-time availability tracking</li>
+                <li><i class="bi bi-check-circle-fill"></i> Fee calculation based on duration</li>
+                <li><i class="bi bi-check-circle-fill"></i> Full ER diagram & normalized schema</li>
+              </ul>
+              <div class="d-flex gap-3 mt-3">
+                <a href="#" class="btn-primary-custom">View Project ↗</a>
+                <a href="#" class="btn-outline-custom">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OTHER PROJECTS -->
+      <div class="row g-4">
+
+        <div class="col-md-6 fade-up">
+          <div class="project-card">
+            <div class="project-img-wrap">
+              <img src="https://placehold.co/500x240/4d96ff/fff?text=📚+Library+System" alt="Library System" class="project-img"/>
+              <div class="project-overlay">
+                <a href="#" class="icon-btn" title="View project"><i class="bi bi-box-arrow-up-right"></i></a>
+                <a href="#" class="icon-btn" title="GitHub"><i class="bi bi-github"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-tags mb-2">
+                <span class="tag">SQL</span>
+                <span class="tag">Database Design</span>
+                <span class="tag">Normalization</span>
+                <span class="tag">University</span>
+              </div>
+              <h3 class="project-title">Library Management System</h3>
+              <p class="project-desc">A relational database system to manage book inventory, member registrations, borrowing records, and return deadlines. Includes stored procedures for automated fine calculation on overdue books and full CRUD operations.</p>
+              <ul class="feature-list mt-2">
+                <li><i class="bi bi-check-circle-fill"></i> Book inventory & member management</li>
+                <li><i class="bi bi-check-circle-fill"></i> Automated overdue fine calculation</li>
+                <li><i class="bi bi-check-circle-fill"></i> Borrow & return tracking</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 fade-up">
+          <div class="project-card zoho-card">
+            <div class="project-img-wrap">
+              <img src="https://placehold.co/500x240/ffd93d/111?text=💼+Zoho+Books" alt="Zoho Books Experience" class="project-img"/>
+              <div class="project-overlay">
+                <a href="https://www.zoho.com/books/" target="_blank" class="icon-btn" title="Zoho Books"><i class="bi bi-box-arrow-up-right"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-tags mb-2">
+                <span class="tag">Zoho Books</span>
+                <span class="tag">Accounting</span>
+                <span class="tag">ERP</span>
+                <span class="tag">Finance</span>
+              </div>
+              <h3 class="project-title">Zoho Books — Accounting Software</h3>
+              <p class="project-desc">Hands-on experience using Zoho Books for financial management including invoicing, expense tracking, bank reconciliation, and generating financial reports. Familiar with the full accounting workflow from sales orders to balance sheets.</p>
+              <ul class="feature-list mt-2">
+                <li><i class="bi bi-check-circle-fill"></i> Invoicing & expense management</li>
+                <li><i class="bi bi-check-circle-fill"></i> Bank reconciliation</li>
+                <li><i class="bi bi-check-circle-fill"></i> Financial reporting & dashboards</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section-pad section-alt" id="skills">
+    <div class="container">
+      <h2 class="section-title">My <span class="accent-dot">Skills</span></h2>
+      <p class="section-sub">What I work with</p>
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-3 fade-up">
+          <div class="skill-card sk-1">
+            <i class="bi bi-code-slash skill-icon"></i>
+            <h4 class="skill-cat">Languages</h4>
+            <div class="skill-list">
+              <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Python</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 fade-up">
+          <div class="skill-card sk-2">
+            <i class="bi bi-layers skill-icon"></i>
+            <h4 class="skill-cat">Frameworks</h4>
+            <div class="skill-list">
+              <span>Bootstrap</span><span>Tailwind</span><span>React</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 fade-up">
+          <div class="skill-card sk-3">
+            <i class="bi bi-database skill-icon"></i>
+            <h4 class="skill-cat">Database</h4>
+            <div class="skill-list">
+              <span>SQL</span><span>Database Design</span><span>Normalization</span><span>ERD</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 fade-up">
+          <div class="skill-card sk-4">
+            <i class="bi bi-briefcase skill-icon"></i>
+            <h4 class="skill-cat">Tools & Software</h4>
+            <div class="skill-list">
+              <span>Zoho Books</span><span>Git & GitHub</span><span>VS Code</span><span>Figma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section-pad" id="contact">
+    <div class="container">
+      <h2 class="section-title">Get in <span class="accent-dot">touch</span></h2>
+      <p class="section-sub">Let's build something great together</p>
+      <div class="row justify-content-center">
+        <div class="col-lg-6 fade-up">
+          <div class="contact-card text-center">
+            <p class="contact-sub">Have a project in mind or just want to say hi? My inbox is always open.</p>
+            <a href="mailto:you@email.com" class="btn-primary-custom btn-lg mb-4 d-inline-block">
+              <i class="bi bi-envelope me-2"></i>Send me an email
+            </a>
+            <div class="social-links mt-3">
+              <a href="https://github.com/" target="_blank" class="social-btn" title="GitHub"><i class="bi bi-github"></i></a>
+              <a href="https://linkedin.com/" target="_blank" class="social-btn" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+              <a href="https://twitter.com/" target="_blank" class="social-btn" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container text-center">
+      <p>© <span id="year"></span> Your Name — Built with Bootstrap &amp; ♥</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

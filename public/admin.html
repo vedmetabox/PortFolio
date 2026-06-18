@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel — Jeeana Vedarth</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body { background: #0a0a0f; color: #f0f0ff; font-family: 'Segoe UI', sans-serif; padding: 2rem; }
+    h1 { margin-bottom: 2rem; }
+    .card { background: #16161f; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    input, textarea, select { background: #0a0a0f !important; color: #f0f0ff !important; border: 1px solid rgba(255,255,255,0.15) !important; border-radius: 8px !important; padding: 0.6rem 1rem !important; width: 100%; margin-bottom: 0.75rem; }
+    input:focus, textarea:focus { outline: none !important; border-color: #ff6b6b !important; }
+    .btn-save { background: linear-gradient(135deg, #ff6b6b, #ff6bff); color: #fff; border: none; padding: 0.7rem 2rem; border-radius: 50px; font-weight: 700; cursor: pointer; }
+    .btn-delete { background: transparent; color: #ff6b6b; border: 1px solid #ff6b6b; padding: 0.4rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+    .btn-edit { background: transparent; color: #4d96ff; border: 1px solid #4d96ff; padding: 0.4rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+    .project-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .project-item:last-child { border-bottom: none; }
+    .lock-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; gap: 1rem; }
+    .lock-screen input { max-width: 300px; text-align: center; }
+  </style>
+</head>
+<body>
+
+<div id="lock-screen" class="lock-screen">
+  <h2>🔒 Admin Login</h2>
+  <input type="password" id="password-input" placeholder="Enter admin password"/>
+  <button class="btn-save" onclick="login()">Login</button>
+  <p id="login-error" style="color:#ff6b6b;display:none">Wrong password</p>
+</div>
+
+<div id="admin-panel" style="display:none; max-width:800px; margin:0 auto;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+    <h1>Project Admin Panel</h1>
+    <a href="/" style="color:#8888aa; font-size:0.9rem;">← Back to portfolio</a>
+  </div>
+
+  <!-- FORM -->
+  <div class="card">
+    <h4 id="form-title">➕ Add New Project</h4><br>
+    <input id="f-title" placeholder="Project title *" required/>
+    <textarea id="f-desc" placeholder="Description" rows="3"></textarea>
+    <input id="f-tags" placeholder="Tags (comma separated): SQL, React, Node"/>
+    <input id="f-image" placeholder="Image URL (optional)"/>
+    <input id="f-github" placeholder="GitHub URL (optional)"/>
+    <input id="f-live" placeholder="Live URL (optional)"/>
+    <textarea id="f-features" placeholder="Feature list (one per line)&#10;Automated slot allocation&#10;Real-time tracking" rows="4"></textarea>
+    <label style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem; cursor:pointer;">
+      <input type="checkbox" id="f-featured" style="width:auto; margin:0"/>
+      Mark as featured project
+    </label>
+    <button class="btn-save" onclick="saveProject()">Save Project</button>
+    <button id="cancel-btn" style="display:none; background:transparent; color:#8888aa; border:none; padding:0.7rem 1rem; cursor:pointer;" onclick="cancelEdit()">Cancel</button>
+  </div>
+
+  <!-- PROJECT LIST -->
+  <div class="card">
+    <h4>📁 Existing Projects</h4><br>
+    <div id="project-list"><p style="color:#8888aa">Loading...</p></div>
+  </div>
+</div>
+
+<script>
+  let password = ''
+  let editingId = null
+
+  function login() {
+    password = document.getElementById('password-input').value
+    fetch('/api/projects', { headers: { 'x-admin-password': password } })
+      .then(r => {
+        if (r.ok) {
+          document.getElementById('lock-screen').style.display = 'none'
+          document.getElementById('admin-panel').style.display = 'block'
+          loadProjects()
+        } else {
+          document.getElementById('login-error').style.display = 'block'
+        }
+      })
+  }
+
+  // Allow Enter key on password field
+  document.getElementById('password-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') login()
+  })
+
+  async function loadProjects() {
+    const res = await fetch('/api/projects')
+    const projects = await res.json()
+    const list = document.getElementById('project-list')
+    if (projects.length === 0) {
+      list.innerHTML = '<p style="color:#8888aa">No projects yet. Add one above!</p>'
+      return
+    }
+    list.innerHTML = projects.map(p => `
+      <div class="project-item">
+        <div>
+          <strong>${p.title}</strong> ${p.featured ? '⭐' : ''}
+          <div style="font-size:0.8rem; color:#8888aa; margin-top:2px">${(p.tags||[]).join(', ')}</div>
+        </div>
+        <div style="display:flex; gap:0.5rem;">
+          <button class="btn-edit" onclick="editProject(${JSON.stringify(p).replace(/"/g, '&quot;')})">✏️ Edit</button>
+          <button class="btn-delete" onclick="deleteProject('${p.id}')">🗑️ Delete</button>
+        </div>
+      </div>`
+    ).join('')
+  }
+
+  async function saveProject() {
+    const body = {
+      title: document.getElementById('f-title').value,
+      description: document.getElementById('f-desc').value,
+      tags: document.getElementById('f-tags').value.split(',').map(t => t.trim()).filter(Boolean),
+      image_url: document.getElementById('f-image').value,
+      github_url: document.getElementById('f-github').value,
+      live_url: document.getElementById('f-live').value,
+      feature_list: document.getElementById('f-features').value.split('\n').filter(Boolean),
+      featured: document.getElementById('f-featured').checked
+    }
+
+    const url = editingId ? `/api/projects/${editingId}` : '/api/projects'
+    const method = editingId ? 'PUT' : 'POST'
+
+    await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': password },
+      body: JSON.stringify(body)
+    })
+
+    cancelEdit()
+    loadProjects()
+  }
+
+  function editProject(p) {
+    editingId = p.id
+    document.getElementById('f-title').value = p.title || ''
+    document.getElementById('f-desc').value = p.description || ''
+    document.getElementById('f-tags').value = (p.tags || []).join(', ')
+    document.getElementById('f-image').value = p.image_url || ''
+    document.getElementById('f-github').value = p.github_url || ''
+    document.getElementById('f-live').value = p.live_url || ''
+    document.getElementById('f-features').value = (p.feature_list || []).join('\n')
+    document.getElementById('f-featured').checked = p.featured || false
+    document.getElementById('form-title').textContent = '✏️ Edit Project'
+    document.getElementById('cancel-btn').style.display = 'inline'
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  function cancelEdit() {
+    editingId = null
+    document.getElementById('f-title').value = ''
+    document.getElementById('f-desc').value = ''
+    document.getElementById('f-tags').value = ''
+    document.getElementById('f-image').value = ''
+    document.getElementById('f-github').value = ''
+    document.getElementById('f-live').value = ''
+    document.getElementById('f-features').value = ''
+    document.getElementById('f-featured').checked = false
+    document.getElementById('form-title').textContent = '➕ Add New Project'
+    document.getElementById('cancel-btn').style.display = 'none'
+  }
+
+  async function deleteProject(id) {
+    if (!confirm('Delete this project?')) return
+    await fetch(`/api/projects/${id}`, {
+      method: 'DELETE',
+      headers: { 'x-admin-password': password }
+    })
+    loadProjects()
+  }
+</script>
+</body>
+</html>
